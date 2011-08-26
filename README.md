@@ -2,9 +2,10 @@ CakePHP on OpenShift Express
 ============================
 
 This git repository helps you get up and running quickly w/ a CakePHP installation
-on OpenShift Express.  The backend database is MySQL and the database name is 'cake'
-which matches the application name 'cake'.  You can call your application by
-whatever name you want (the name of the database will always match the application).
+on OpenShift Express.  The backend database is MySQL and the database name is the
+same as your application name (using $_ENV['OPENSHIFT_APP_NAME']).  You can call
+your application by whatever name you want (the name of the database will always
+match the application).
 
 
 Running on OpenShift
@@ -20,11 +21,12 @@ Add MySQL support to your application
 
     rhc-ctl-app -a cake -e add-mysql-5.1
 
-Add this upstream seambooking repo
+Add this upstream CakePHP repo
 
     cd cake
     git remote add upstream -m master git://github.com/openshift/cakephp-example.git
     git pull -s recursive -X theirs upstream master
+    # note that the git pull above can be used later to pull updates to Wordpress
     
 Then push the repo upstream
 
