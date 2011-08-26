@@ -26,7 +26,7 @@ Add this upstream CakePHP repo
     cd cake
     git remote add upstream -m master git://github.com/openshift/cakephp-example.git
     git pull -s recursive -X theirs upstream master
-    # note that the git pull above can be used later to pull updates to Wordpress
+    # note that the git pull above can be used later to pull updates to CakePHP
     
 Then push the repo upstream
 
