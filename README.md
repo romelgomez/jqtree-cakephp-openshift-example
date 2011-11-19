@@ -34,7 +34,7 @@ Then push the repo upstream
 
 That's it, you can now checkout your application at (default admin account is admin/admin):
 
-    http://cake-$your_domain.rhcloud.com
+    http://cake-$yournamespace.rhcloud.com
 
 
 NOTES:
