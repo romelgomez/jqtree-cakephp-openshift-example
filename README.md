@@ -39,14 +39,14 @@ That's it, you can now checkout your application at (default admin account is ad
 
 NOTES:
 
-GIT_ROOT/.openshift/action_hooks/build:
+GIT_ROOT/.openshift/action_hooks/post_deploy:
     This script is executed with every 'git push'.  Feel free to modify this script
     to learn how to use it to your advantage.  By default, this script will create
     the database tables that this example uses.
 
     If you need to modify the schema, you could create a file 
     GIT_ROOT/.openshift/action_hooks/alter.sql and then use
-    GIT_ROOT/.openshift/action_hooks/build to execute that script (make susre to
+    GIT_ROOT/.openshift/action_hooks/post_deploy to execute that script (make sure to
     back up your application + database w/ rhc-snapshot first :) )
 
 CakePHP Security:
