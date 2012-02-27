@@ -47,7 +47,7 @@ GIT_ROOT/.openshift/action_hooks/deploy:
     If you need to modify the schema, you could create a file 
     GIT_ROOT/.openshift/action_hooks/alter.sql and then use
     GIT_ROOT/.openshift/action_hooks/deploy to execute that script (make sure to
-    back up your application + database w/ rhc app snapshot first :) )
+    back up your application + database w/ 'rhc app snapshot save'first :) )
 
 CakePHP Security:
     If you're doing more than just 'playing' be sure to edit app/config/core.php
