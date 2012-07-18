@@ -19,6 +19,44 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+// This is where we define the OpenShift specific secure variable functions
+require_once('openshift.inc');
+
+// Set the default keys to use
+$_default_keys = array(
+    'Security.salt'       => 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi',
+    'Security.cipherSeed' => '76859309657453542496749683645'
+);
+
+// This function gets called by openshift_secure and passes an array
+function make_secure_key($args) {
+  $hash = $args['hash'];
+  $key  = $args['variable'];
+  $original = $args['original'];
+
+  $chars = '0123456789';
+  if ($key != 'Security.cipherSeed') {
+    $chars .= 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $chars .= '!@#$%^&*()';
+    $chars .= '-_ []{}<>~`+=,.;:/?|';
+  }
+
+  // Convert the hash to an int to seed the RNG
+  srand(hexdec(substr($hash,0,8)));
+  // Create a random string the same length as the default
+  $val = '';
+  for($i = 1; $i <= strlen($original); $i++){
+    $val .= substr( $chars, rand(0,strlen($chars))-1, 1);
+  }
+  // Reset the RNG
+  srand();
+  // Set the value
+  return $val;
+}
+
+// Generate OpenShift secure keys (or return defaults if not on OpenShift)
+$key_list = openshift_secure($_default_keys,'make_secure_key');
+
 /**
  * CakePHP Debug Level:
  *
@@ -184,12 +222,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', $key_list['Security.salt']);
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+	Configure::write('Security.cipherSeed', $key_list['Security.cipherSeed']);
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
