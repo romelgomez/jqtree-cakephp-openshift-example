@@ -58,22 +58,15 @@
  * For MySQL to connect via socket specify the `unix_socket` parameter instead of `host` and `port`
  */
 
-define("OS_DB_HOST", $_ENV['OPENSHIFT_DB_HOST']);
-define("OS_DB_PORT", $_ENV['OPENSHIFT_DB_PORT']);
-define("OS_DB_NAME", $_ENV['OPENSHIFT_APP_NAME']);
-define("OS_DB_TEST", 'test_' . $_ENV['OPENSHIFT_APP_NAME']);
-define("OS_DB_USER", $_ENV['OPENSHIFT_DB_USERNAME']);
-define("OS_DB_PASS", $_ENV['OPENSHIFT_DB_PASSWORD']);
-
 class DATABASE_CONFIG {
         public $default = array(
                 'datasource' => 'Database/Mysql',
                 'persistent' => false,
-                'host'       => OS_DB_HOST,
-                'port'       => OS_DB_PORT,
-                'login'      => OS_DB_USER,
-                'password'   => OS_DB_PASS,
-                'database'   => OS_DB_NAME,
+                'host'       => '',
+                'port'       => '',
+                'login'      => '',
+                'password'   => '',
+                'database'   => '',
                 'prefix'     => '',
                 //'encoding' => 'utf8',
         );
@@ -81,12 +74,20 @@ class DATABASE_CONFIG {
         public $test = array(
                 'datasource' => 'Database/Mysql',
                 'persistent' => false,
-                'host'       => OS_DB_HOST,
-                'port'       => OS_DB_PORT,
-                'login'      => OS_DB_USER,
-                'password'   => OS_DB_PASS,
-                'database'   => OS_DB_TEST,
+                'host'       => '',
+		'port'       => '',
+                'login'      => '',
+                'password'   => '',
+                'database'   => 'test_database',
                 'prefix'     => '',
                 //'encoding' => 'utf8',
         );
+
+	public function __construct() {
+	       $this->default['host']     = getenv("OPENSHIFT_DB_HOST");
+	       $this->default['port']     = getenv("OPENSHIFT_DB_PORT");
+	       $this->default['login']    = getenv("OPENSHIFT_DB_USERNAME");
+	       $this->default['password'] = getenv("OPENSHIFT_DB_PASSWORD");
+	       $this->default['database'] = getenv("OPENSHIFT_APP_NAME");
+	}
 }
