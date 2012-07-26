@@ -16,6 +16,31 @@ then
     exit 5
 fi
 
+RETRY=60
+while [ $RETRY -gt 0 ] ; do
+    #reload env variables
+    for env_var in  $OPENSHIFT_HOMEDIR/.env/*
+    do
+        . $env_var
+    done
+
+    #check for db
+    if [ -n "$OPENSHIFT_DB_HOST" ]
+    then
+        echo "Database server found at $OPENSHIFT_DB_HOST. initializing..."
+        sleep 5
+        break
+    fi
+
+    sleep 1
+    RETRY=$(( $RETRY - 1 ))
+done
+
+if [ -z "$OPENSHIFT_DB_HOST" ]
+then
+    exit 5
+fi
+
 # Confirm database exists, if not create it
 if ! /usr/bin/mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" -e "select * from posts;" "$OPENSHIFT_APP_NAME" > /dev/null 2>&1
 then
@@ -29,3 +54,6 @@ then
 else
     echo "Database found, skipping import."
 fi
+
+$OPENSHIFT_GEAR_CTL_SCRIPT stop
+$OPENSHIFT_GEAR_CTL_SCRIPT start
