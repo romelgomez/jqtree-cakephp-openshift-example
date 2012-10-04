@@ -139,12 +139,12 @@ index 0000000..c24b22e
 + * For MySQL to connect via socket specify the `unix_socket` parameter instead of `host` and `port`
 + */
 +
-+define("OS_DB_HOST", $_ENV['OPENSHIFT_DB_HOST']);
-+define("OS_DB_PORT", $_ENV['OPENSHIFT_DB_PORT']);
++define("OS_DB_HOST", $_ENV['OPENSHIFT_MYSQL_DB_HOST']);
++define("OS_DB_PORT", $_ENV['OPENSHIFT_MYSQL_DB_PORT']);
 +define("OS_DB_NAME", $_ENV['OPENSHIFT_APP_NAME']);
 +define("OS_DB_TEST", 'test_' . $_ENV['OPENSHIFT_APP_NAME']);
-+define("OS_DB_USER", $_ENV['OPENSHIFT_DB_USERNAME']);
-+define("OS_DB_PASS", $_ENV['OPENSHIFT_DB_PASSWORD']);
++define("OS_DB_USER", $_ENV['OPENSHIFT_MYSQL_DB_USERNAME']);
++define("OS_DB_PASS", $_ENV['OPENSHIFT_MYSQL_DB_PASSWORD']);
 +
 +class DATABASE_CONFIG {
 +        public $default = array(
