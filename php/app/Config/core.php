@@ -20,7 +20,7 @@
  */
 
 // This is where we define the OpenShift specific secure variable functions
-require_once('openshift.inc');
+include(dirname(dirname(dirname(dirname(__FILE__)))) . DS . 'libs' . DS . 'openshift.inc');
 
 // Set the default keys to use
 $_default_keys = array(
