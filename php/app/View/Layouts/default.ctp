@@ -56,6 +56,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			?>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php 
+	// Remove this sql_dump to allow DebugKit to handle more advanced SQL display
+	// echo $this->element('sql_dump'); 
+	?>
 </body>
 </html>
