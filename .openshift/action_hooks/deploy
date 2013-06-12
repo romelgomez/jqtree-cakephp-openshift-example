@@ -5,7 +5,6 @@
 # ruby, etc.
 
 set -e
-set -x
 
 if [ -z "$OPENSHIFT_MYSQL_DB_HOST" ]
 then
