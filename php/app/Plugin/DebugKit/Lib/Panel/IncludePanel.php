@@ -1,21 +1,42 @@
 <?php
-App::uses('DebugPanel', 'DebugKit.Lib');
-
 /**
  * Include Panel
  *
  * Provides a list of included files for the current request
  *
- * @package       cake.debug_kit.panels
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  **/
+
+App::uses('DebugPanel', 'DebugKit.Lib');
+
+/**
+ * Class IncludePanel
+ *
+ */
 class IncludePanel extends DebugPanel {
 
 /**
  * The list of plugins within the application
+ *
  * @var <type>
  */
 	protected $_pluginPaths = array();
 
+/**
+ * File Types
+ *
+ * @var array
+ */
 	protected $_fileTypes = array(
 		'Cache', 'Config', 'Configure', 'Console', 'Component', 'Controller',
 		'Behavior', 'Datasource', 'Model', 'Plugin', 'Test', 'View', 'Utility',
@@ -37,7 +58,7 @@ class IncludePanel extends DebugPanel {
  * Get a list of files that were included and split them out into the various parts of the app
  *
  * @param Controller $controller
- * @return void
+ * @return array
  */
 	public function beforeRender(Controller $controller) {
 		$return = array('core' => array(), 'app' => array(), 'plugins' => array());
@@ -67,8 +88,7 @@ class IncludePanel extends DebugPanel {
  * @return array
  */
 	protected function _includePaths() {
-		$split = (strstr(PHP_OS, 'win')) ? ';' : ':';
-		$paths = array_flip(array_merge(explode($split, get_include_path()), array(CAKE)));
+		$paths = array_flip(array_merge(explode(PATH_SEPARATOR, get_include_path()), array(CAKE)));
 
 		unset($paths['.']);
 		return array_flip($paths);
@@ -77,7 +97,7 @@ class IncludePanel extends DebugPanel {
 /**
  * Check if a path is part of cake core
  * @param string $file
- * @return bool
+ * @return boolean
  */
 	protected function _isCoreFile($file) {
 		return strstr($file, CAKE);
@@ -86,7 +106,7 @@ class IncludePanel extends DebugPanel {
 /**
  * Check if a path is from APP but not a plugin
  * @param string $file
- * @return bool
+ * @return boolean
  */
 	protected function _isAppFile($file) {
 		return strstr($file, APP);
@@ -95,7 +115,7 @@ class IncludePanel extends DebugPanel {
 /**
  * Check if a path is from a plugin
  * @param string $file
- * @return bool
+ * @return boolean
  */
 	protected function _isPluginFile($file) {
 		foreach ($this->_pluginPaths as $plugin => $path) {
@@ -114,7 +134,7 @@ class IncludePanel extends DebugPanel {
  *  - app for app files
  *  - core for core files
  *  - PluginName for the name of a plugin
- * @return bool
+ * @return boolean
  */
 	protected function _niceFileName($file, $type) {
 		switch ($type) {

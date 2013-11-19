@@ -66,8 +66,8 @@
 	padding: 4px;
 }
 #debug-kit-toolbar .panel-tab a.edit-value {
-    float: none;
-    display: inline;
+		float: none;
+		display: inline;
 }
 
 /* Hovering over link shows tab, useful for no js  */
@@ -373,4 +373,12 @@
 #debug-kit-toolbar #history-tab a.loading:after {
 	content : ' Loading...';
 	font-style:italic;
+}
+
+/* Minimized mode */
+#debug-kit-toolbar.minimized {
+	opacity: 0.75;
+}
+#debug-kit-toolbar.minimized:hover {
+	opacity: inherit;
 }
