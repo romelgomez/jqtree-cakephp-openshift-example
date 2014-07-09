@@ -41,6 +41,13 @@ variables for username, host and password:
     $_ENV['OPENSHIFT_MYSQL_DB_USERNAME']  - DB Username
     $_ENV['OPENSHIFT_MYSQL_DB_PASSWORD']  - DB Password
 
+or
+
+    $_ENV['OPENSHIFT_POSTGRESQL_DB_HOST']      - DB host
+    $_ENV['OPENSHIFT_POSTGRESQL_DB_PORT']      - DB Port
+    $_ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME']  - DB Username
+    $_ENV['OPENSHIFT_POSTGRESQL_DB_PASSWORD']  - DB Password
+
 To get a full list of environment variables, simply add a line in your
 .openshift/action_hooks/build script that says "export" and push.
 
