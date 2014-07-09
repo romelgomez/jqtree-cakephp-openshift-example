@@ -4,12 +4,12 @@
 set -e
 
 # Confirm database exists, if not create it
-if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" --port "$OPENSHIFT_MYSQL_DB_PORT" -e "select * from posts;" "$OPENSHIFT_APP_NAME" > /dev/null 2>&1
+if ! mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" --port "$OPENSHIFT_MYSQL_DB_PORT" -e "select * from posts;" "$OPENSHIFT_APP_NAME" > /dev/null 2>&1
 then
     echo
     echo "Database schema not found, importing 'cake.mysql.sql' schema."
     echo
-    /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" --port "$OPENSHIFT_MYSQL_DB_PORT" "$OPENSHIFT_APP_NAME" < "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/cake.mysql.sql"
+    mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" --port "$OPENSHIFT_MYSQL_DB_PORT" "$OPENSHIFT_APP_NAME" < "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/cake.mysql.sql"
     echo
     echo "done."
 else
