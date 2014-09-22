@@ -1,0 +1,44 @@
+body {
+    padding-top: 50px;
+}
+.main-container {
+    padding: 40px 15px;
+}
+
+
+
+.pull-left {
+       float: left !important;
+   }
+.pull-right {
+    float: right !important;
+}
+
+
+/* tree  */
+ul.jqtree-tree .jqtree-element {
+
+    /* cascada inhabilitada  */
+    position: relative;
+
+    /* nuevo css */
+    padding: 7px;
+    border-radius: 4px;
+}
+
+ul.jqtree-tree li {
+    /* nuevo css */
+    border: 1px solid #143546;
+    margin: 7px;
+    border-radius: 4px;
+}
+ul.jqtree-tree span.jqtree-border {
+    /* nuevo css */
+    padding: 7px;
+    border-radius: 4px;
+}
+/* tree ends */
+
+
+
+

@@ -36,4 +36,14 @@ class AppController extends Controller {
 	 * Add in the DebugKit toolbar
 	 */
 	public $components = array('DebugKit.Toolbar');
+
+    public function beforeFilter(){
+
+        /* Para Ubicarse entre las vistas y controladores
+         ****************************************************/
+        $this->{'set'}('controller',$this->{'request'}->params['controller']);
+        $this->{'set'}('action',$this->{'request'}->params['action']);
+
+    }
+
 }

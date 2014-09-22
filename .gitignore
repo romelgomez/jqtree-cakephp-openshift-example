@@ -1,1 +1,9 @@
 .project
+
+# IntelliJ IDE files.
+jqtreecakephpexample.iml
+.idea
+
+# CakePHP
+php/app/Config/database.php
+php/app/tmp
