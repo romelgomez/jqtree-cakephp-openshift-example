@@ -1,6 +1,6 @@
 ## Jqtree CakePHP Example
 
-DEMO: jqtreecakephpexample-theteacher.rhcloud.com
+DEMO: http://jqtreecakephpexample-theteacher.rhcloud.com/
 
 CakePHP files are in /php, the rest are of openshift. 
    
